@@ -26,6 +26,10 @@ else
   sleep 10
 fi
 
+# Install uuid-ossp extension if it's not already installed
+echo "Checking if uuid-ossp extension is installed..."
+docker exec -i $CONTAINER_NAME psql -U $DB_USER -d $DB_NAME -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+
 # Export the password to the environment
 export PGPASSWORD=$DB_PASSWORD
 
