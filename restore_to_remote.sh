@@ -8,6 +8,10 @@ DB_USER="your_username"                # PostgreSQL username
 DB_PASSWORD="your_password"            # PostgreSQL password
 DUMP_FILE="your_dump_file.dump"        # Path to the dump file
 
+# Install uuid-ossp extension if it's not already installed
+echo "Checking if uuid-ossp extension is installed..."
+docker exec -i $CONTAINER_NAME psql -U $DB_USER -d $DB_NAME -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+
 # Export the password to the environment
 export PGPASSWORD="$DB_PASSWORD"
 
